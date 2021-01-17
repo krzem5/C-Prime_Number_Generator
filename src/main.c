@@ -32,7 +32,7 @@ int main(int argc,const char** argv){
 	uint64_t l=0;
 	printf("Start...\n");
 	QueryPerformanceCounter(&s);
-	uint64_t* o=prime_number_generator(100/*0x727c9716*/,&l);
+	uint64_t* o=prime_number_generator(10000,&l);
 	QueryPerformanceCounter(&e);
 	if (!l){
 		printf("No Primes (%.6fs)",(e.QuadPart-s.QuadPart)*1e6/f.QuadPart*1e-6);
@@ -42,9 +42,6 @@ int main(int argc,const char** argv){
 	}
 	else{
 		printf("%llu Primes (%.6fs):\n",l,(e.QuadPart-s.QuadPart)*1e6/f.QuadPart*1e-6);
-		if (l>25){
-			l=25;
-		}
 		uint32_t w=_log10(l-1);
 		for (uint64_t i=0;i<l;i++){
 			printf("[%*llu]: %llu\n",w,i,*(o+i));

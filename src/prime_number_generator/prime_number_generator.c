@@ -28,16 +28,18 @@ uint64_t* prime_number_generator(uint64_t n,uint64_t* l){
 	uint64_t* s=calloc((n+63)>>6,sizeof(uint64_t));
 	for (uint64_t i=1,j=1;j<n;j+=(i<<1)+1,i++){
 		for (uint64_t k=1,l=1;l<n;l+=(k<<1)+1,k++){
+			uint64_t m=3*j;
 			if (i<=k){
+				m+=l;
 				goto _skip;
 			}
-			uint64_t m=3*j-l;
+			m-=l;
 			if (m<=n){
 				if (i>k&&m%12==11){
 					*(s+(m>>6))^=(uint64_t)1<<(m&0x3f);
 				}
-_skip:
 				m+=l*2;
+_skip:
 				if (m<=n){
 					if (m%12==7){
 						*(s+(m>>6))^=(uint64_t)1<<(m&0x3f);
